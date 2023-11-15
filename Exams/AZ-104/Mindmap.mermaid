@@ -1,0 +1,50 @@
+mindmap
+  root(AZ-104)
+    (Prerequisites for Azure administrators)
+      {{Configure Azure resources with tools}}
+        Portal
+          Let's you build, manage and monitor everything.
+          You can do things like:
+          Search resources
+          Manage resources
+          Create cusomized dashboards
+          Access the cloud shell
+          Receive notifications
+          Links to Azure documentation
+        Azure Cloud Shell
+          Is an interactive, browser accesible shell for managing Azure Resources
+          Automatically authenticated
+          Runs in temporary host
+          Requires
+            a resource group
+            a storage account
+            an Azure file share
+        Azure PowerShell
+          Is a module that you add to Windows PowerShell or PowerShell Core
+          Az is the formal name of the PowerShell module
+          AzureRM is the old name of the PowerShell module
+        Azure CLI
+          Is a command-line tool for managing Azure resources
+          Runs on Windows, macOS, and Linux
+          Can be used from a browser with Azure Cloud Shell
+          Can be used interactive or scripted
+          Commands in the CLI are structured in groups and subgroups
+            Each group represents a service provided by Azure
+            The subgroups divide commands for these services into logical groupings
+            Example: The storage group contains subgroups including account, blob, share, and queue
+          Find a command using:
+            az find
+            az find blob
+          Get help using:
+            az -h
+            az storage blob -h (--help)
+      {{Use Azure Resource Manager}}
+      {{Configure resources with Azurre Resource Manager templates}}
+      {{Automate Azure tasks with PowerShell}}
+      {{Control Azure services with the CLI}}
+      {{Deploy Azure infrastructure using JSON ARM templates}}
+      {{Manage Azure identities and governance}}
+      {{Implement and manage storage}}
+      {{Deploy and manage Azure compute resources}}
+      {{Configure and manage virtual networking}}
+      {{Monitor and back up Azure resources}}
