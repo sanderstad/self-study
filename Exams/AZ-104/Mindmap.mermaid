@@ -151,3 +151,148 @@ mindmap
       {{Deploy and manage Azure compute resources}}
       {{Configure and manage virtual networking}}
       {{Monitor and back up Azure resources}}
+    (Manage identities and governance in Azure)
+    (Implement and manage storage in Azure)
+    (Deploy and manage Azure compute resources)
+    (Configure and manage virtual networks for Azure administrators)
+      {{Configure virtual networks}}
+        [Azure virtual networks]
+          is a logically isolated network in Azure
+          used to provision and manage virtual private networks in Azure
+          has its own CIDR block
+          can be linked to other virtual networks and on-premises networks
+          you can control the DNS server settings for a virtual network
+        [Create subnets]
+          Things to know
+            contains a range of IP addresses that fall within the virtual network address space
+            address range for a subnet must be unique within the address space for the virtual network.
+            range for one subnet can't overlap with other subnet IP address
+            IP address space for a subnet must be specified by using CIDR notation.
+        [Create virtual networks]
+          Things to know
+            To create a virtual network, you need to define at least one subnet.
+            Plan to use an IP address space that's not already in use in your organization.
+            When you create a virtual network, you need to define the IP address space for the network.
+        [Plan IP addressing]
+          Things to know
+            IP addresses can be statically assigned or dynamically assigned.
+            You can separate dynamically and statically assigned IP resources into different subnets.
+        [Create public IP addressing]
+          Things to know
+            You can create a public IP address for your resource in the Azure portal.
+          Things to Consider
+            IP version: IPv4 or IPv6 or Both
+            SKU: Basic or Standard
+            Name: Name of the public IP address
+            Assignment: Static or Dynamic
+        [Associate public IP addresses]
+          Things to Consider
+            IP address is static or dynamic with basic sku. with Standard sku it's always static
+            Security is open by default on basic sku. With Standard sku it's closed by default
+            Resources are network interfaces, load balancers, VPN gateways, and application gateways. On Standard sku it's networks interfaces or public load balancers
+            Redundancy is not supported on basic sku. On Standard sku it's zone-redundant by default
+        [Allocate or assign private IP addresses]
+          Private IP address Assignment
+            Dynamic
+              Azure assigns the next available address from the address range
+              Is the default method of allocation
+              Suppose address 10.0.0.4 through 10.0.0.9 are already in use, Azure will assign 10.0.0.10
+            Static
+              You select and assign any unassigned ip address in the address range
+      {{Configure network security groups}}
+        [Intro]
+          Network security groups are a way to limit network traffic to resources in your virtual network
+        [Implement network security groups]
+          Things to know
+            Contains a list of security rules that allow or deny inbound or outbound network traffic
+            Can be associated to a subnet or a network interface
+            Can be associated multiple times
+            You create a network security group and define security rules in the Azure portal
+          Network security groups and subnets
+            You can assign network security groups to a subnet and create a protected screened subnet, also referred to as a demilitarized zone or DMZ
+            A DMZ acts as a buffer between resources within your virtual network and the internet
+            Each subnet can have a maximum of one associated network security group
+          Network security groups and network interfaces
+            Define network security group rules to control all traffic that flows through a NIC
+            Each network interface that exists in a subnet can have zero, or one, associated network security groups
+        [Determine network security group rules]
+          Things to know
+            Azure creates several default security rules within each network security group, including inbound traffic and outbound traffic
+            Azure creates the default security rules in each network security group that you create
+            You can add more security rules to a network security group
+            Each security rule is assigned a Priority value
+            You can't remove the default security rules
+            You can override a default security rule by creating another security rule that has a higher Priority
+          Inbound traffic rules
+            Azure defines three default inbound security rules for your network security group
+              These rules deny all inbound traffic except traffic from your virtual network and Azure load balancers
+            Default Rules
+              AllowVnetInBound
+                Allows inbound traffic from all resources in the virtual network
+                Has a priority of 65000
+              AllowInternetBound
+                Allows outbound traffic to the internet
+                Has a priority of 65001
+              DenyAllInBound
+                Denies all inbound traffic from all sources
+                Has a priority of 65500
+          Outbound traffic rules
+            Azure defines three default outbound security rules for your network security group
+              These rules only allow traffic to the internet and your virtual network
+            Default Rules
+              AllowVnetOutBound
+                Allows outbound traffic from all resources in the virtual network
+                Has a priority of 65000
+              AllowInternetOutBound
+                Allows outbound traffic to the internet
+                Has a priority of 65001
+              DenyAllOutBound
+                Denies all outbound traffic to all destinations
+                Has a priority of 65500
+        [Determine network security group effective rules]
+          Each network security group and its defined security rules are evaluated independently
+          Inbound traffic effective rules
+            Azure processes rules for inbound traffic for all VMs in the configuration
+            Azure identifies if the VMs are members of an NSG, and if they have an associated subnet or NIC
+            When an NSG is created, Azure creates the default security rule DenyAllInbound for the group
+              The default behavior is to deny all inbound traffic from the internet
+            If an NSG has a subnet or NIC, the rules for the subnet or NIC can override the default Azure security rules
+            NSG inbound rules for a subnet in a VM take precedence over NSG inbound rules for a NIC in the same VM
+          Outbound traffic effective rules
+            Azure processes rules for outbound traffic by first examining NSG associations for NICs in all VMs
+            When an NSG is created, Azure creates the default security rule AllowInternetOutbound for the group
+              The default behavior is to allow all outbound traffic to the internet
+            If an NSG has a subnet or NIC, the rules for the subnet or NIC can override the default Azure security rules
+            NSG outbound rules for a NIC in a VM take precedence over NSG outbound rules for a subnet in the same VM
+          Things to consider when creating effective rules
+            Consider allowing all traffic
+            Consider importance of allow rules
+            Consider intra-subnet traffic
+            Consider rule priority
+        [Create network security group rules]
+          Things to know
+            Source: Identifies how the security rule controls inbound traffic.
+            Destination: Identifies how the security rule controls outbound traffic.
+            Service: Specifies the destination protocol and port range for the security rule.
+            Priority: Assigns the priority order value for the security rule.
+        [Implement application security groups]
+          Things to know
+            Application security groups work in the same way as network security groups
+            They provide an application-centric way of looking at your infrastructure
+          Things to consider
+            Consider IP address maintenance
+            Consider no subnets
+            Consider simplified rules
+            Consider workload support
+        [Interactive lab simulation]
+      {{Configure Azure DNS}}
+      {{Configure Azure Virtual Network peering}}
+      {{Configure network routing and endpoints}}
+      {{Configure Azure Load Balance}}
+      {{Configure Azure Application Gateway}}
+      {{Design an IP addressing schema for your Azure deployment}}
+      {{Distribute your services across Azure virtual networks and integrate them by using virtual network peering}}
+      {{Host your domain on Azure DNS}}
+      {{Manage and control traffic flow in your Azure deployment with routes}}
+      {{Improve application scalability and resiliency by using Azure Load Balancer}}
+    (Monitor and back up Azure resources)
