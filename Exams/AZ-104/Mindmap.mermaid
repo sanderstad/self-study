@@ -286,7 +286,90 @@ mindmap
             Consider workload support
         [Interactive lab simulation]
       {{Configure Azure DNS}}
+        [Identify domains and custom domains]
+          Things to know
+            When you create an Azure subscription, Azure assigns a subdomain to the subscription
+            Azure applies en initial domain name to the subscription
+            The initial domain name is in the form of subscriptionname.onmicrosoft.com
+            You can't change the initial domain name
+            You can add custom domain names to your Azure subscription
+        [Verify custom domain names]
+          Intro
+            When an administrator adds a custom domain name to a Microsoft Entra instance, the custom domain name is initially in an unverified state
+          Create Azure DNS zones
+            An Azure DNS zone hosts the DNS records for a domain
+          Things to know about DNS zones
+            Within a resource group, the name of a DNS zone must be unique
+            Multiple DNS zones can have the same name, as long as they are in different resource groups
+            The Root/Parent domain is registered at the registrar and then pointed to Azure DNS.
+            Child domains are registered directly in Azure DNS.
+          Delegate DNS domains
+            The delegation process for your domain involves several steps:
+              Identify your DNS name servers, Update your parent domain, Delegate subdomains
+          How to find your DNS name servers
+            The easiest way to find the DNS name servers assigned to your DNS zone is through the Azure portal.
+          Update your parent domain
+            After your DNS zone is created, and you can identify your DNS name servers, you need to update your parent domain.
+          Things to consider when working with NS records
+            When you copy an NS record, a DNS name server address, be sure to include the trailing period "." at the end of the address
+            To delegate your domain to Azure DNS, you must use the exact names of the DNS name servers as created by Azure DNS
+            We recommend that you always copy all DNS name server NS records for your domain to the parent domain
+          How to delegate subdomains
+            You can delegate a subdomain for your domain in Azure DNS by setting up a separate child DNS zone.
+          Add DNS record sets
+            A DNS record set is a collection of records in a DNS zone
+            It's also known as a resource record set
+            You can define records sets in the Azure Portal
+            Things to know about DNS record sets
+              All records in a DNS record set must have the same name and the same record type
+              It cannot contain two identical records
+              A record set of type CNAME can contain only one record
+              A record set can have 0 to X record
+              An empty record set does not appear in the Azure DNS name servers
+            Plan for Azure Private DNS zones
+              Things to know about Azure Private DNS benefits
+                No custom DNS solution required
+                Azure Private DNS supports all common DNS record types, including A, AAAA, CNAME, MX, PTR, SOA, SRV, and TXT.
+                Automatic hostname record management
+                Hostname resolution between virtual networks
+                Split-horizon DNS support
       {{Configure Azure Virtual Network peering}}
+        [Introduction]
+          lets you connect virtual networks in the same or different regions
+          provides secure communication between resources in the peered networks
+        [Determine Azure Virtual Network peering uses]
+          After the networks are peered, the two virtual networks operate as a single network, for connectivity purposes
+          Things to know
+            There are two types of Azure Virtual Network peering: regional and global.
+            Regional virtual network peering connects Azure virtual networks that exist in the same region
+            Global virtual network peering connects Azure virtual networks that exist in different regions
+            The individual virtual networks are still managed as separate resources
+          Things to consider
+            Private network connections
+            Strong performance
+            Simplified communication
+            Seamless data transfer
+            No resource disruptions
+        [Determine gateway transit and connectivity]
+          When virtual networks are peered, you can configure Azure VPN Gateway in the peered virtual network as a transit poin
+          Things to know about Azure VPN Gateway
+            A virtual network can have only one VPN gateway
+            Gateway transit is supported for both regional and global virtual network peering
+        [Create virtual network peering]
+          Can be configured for virtual networks by using PowerShell, the Azure CLI, and in the Azure portal
+          Things to know
+            Your Azure account must be assigned to the Network Contributor or Classic Network Contributor role
+            You need two virtual networks
+            The second virtual network in the peering is referred to as the remote network
+          How to check your peering status
+            the two primary status conditions are Initiated and Connected
+        [Extend peering with user-defined routes and service chaining]
+          The communication capabilities in a peering are available to only the virtual networks and resources in the peering
+          Things to know about extending peering
+            There are a few ways to extend the capabilities of your peering
+              Hub and spoke networks
+              User-defined routes
+              Service chaining
       {{Configure network routing and endpoints}}
       {{Configure Azure Load Balance}}
       {{Configure Azure Application Gateway}}
